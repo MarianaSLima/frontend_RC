@@ -1,0 +1,157 @@
+
+.main-login{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+.text_Area{
+    font-size: 50px;
+    text-align: left;
+    color: rgb(255, 178, 126);
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-area{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form-area {
+    width: 400px;
+    height: auto;
+    min-height: 500px;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.3);
+    background-color: #FFF;
+    border-radius: 19px;
+}
+.form-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60%;
+}
+form{
+    height: auto;
+    min-height: 400px;
+    padding: 30px;
+}
+.cx_textLog{
+    height: auto;
+    min-height: 70px;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    margin: 10px;
+}.cx_textLog h1{
+    font-size: 50px;
+}
+.cx_interacao{
+    height: auto;
+    min-height: 100px;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.cx_bt{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+.cx_bt input{
+    width: 200px;
+    height: 40px;
+    background-color: #20affc;
+    border: none;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 5px;
+}
+.cx_bt button:hover{
+    background-color: #0289d1;
+    transition: 0.2s;
+}
+.cx_interacao label{
+    margin: 10px;
+    font-size: 20px;
+}
+.cx_interacao input{
+    width: 300px;
+    height: 40px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding-left: 5px;
+}
+.cx_links{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+.cx_links a{
+    color: rgb(70, 70, 70);
+    text-decoration: none;
+}
+.cx_links a:hover{
+    text-decoration: underline;
+}
+
+
+
+
+
+.modal-area {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(8,8,8,0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Conteudo{
+    width: 450px;
+    height: 700px;   
+    display: flex;
+    border-radius: 15px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px; 
+}
+
+.cad-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cad-inputs{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 90%;
+    margin-top: 20px;
+}
+
+.titulo{
+    font-size: 40px;
+    color: rgba(0, 0, 0, 0.9);
+    text-align: center;
+    width: 100%;
+    
+}

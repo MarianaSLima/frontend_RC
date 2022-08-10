@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    box-sizing: content-box;
+}
+header{
+    width: 100%;
+    height: 200px;
+    background-color: #002336;
+    background-image: url(../../assets/img/banner_city.png);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    display: flex;
+}
+header a{
+    color: white;
+}
+#ft_perfil{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: #e6e6e6;
+}
+#ft_perfil i:hover{
+    color: #bf6f0a;
+    transition: 0.3s;
+}
+#ft_logo{
+    flex: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: #e6e6e6;
+}
+#ft_logo img{
+    width: 200px;
+}
+#config{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: #e6e6e6;
+}
+#config  i:hover{
+    color: #bf6f0a;
+    transition: 0.3s;
+}
