@@ -381,6 +381,8 @@ main {
     bottom: 0;
     background: rgba(8, 8, 8, 0.9);
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 textarea {
@@ -1091,4 +1093,59 @@ form {
         height: 130px;
     }
 
+}
+
+.dialog-content{
+    min-width: 20%;
+    min-height: 20%;
+    max-width: 30%;
+    max-height: 30%;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+.tipo-mensagem {
+    display: flex;
+    align-items: flex-end;
+    flex: 1;
+    width: 100%;
+    border-bottom: 1px solid #999999;
+}
+
+.tipo-mensagem h1{
+    font-size: 20px;
+    color: rgb(65, 65, 65);
+}
+.mensagem{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    flex: 4;
+    padding-bottom: 10px;
+}
+
+.mensagem p{
+    font-size: 18px;
+    color: rgb(116, 116, 116);
+}
+
+.btn-dialog{
+    flex: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.btn-dialog button{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    color: #fff;
+    background-color: #0289d1;
+    border-radius: 5px;
+    border: 0;
 }

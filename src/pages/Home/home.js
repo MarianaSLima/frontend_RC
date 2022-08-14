@@ -1,7 +1,6 @@
-import Postagens from '../../componentes/Postagens/posts';
+
 import Header from '../../componentes/Header/header';
-import { useEffect, useState } from 'react';
-import { useAuth } from '../../auth/ProvideAuth';
+import { useState } from 'react';
 
 function Modal(props) { 
 

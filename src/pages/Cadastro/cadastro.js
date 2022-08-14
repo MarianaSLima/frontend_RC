@@ -1,16 +1,23 @@
 import { useState } from 'react';
 import Logo from '../../assets/img/logo_2.png';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { registerStart } from '../../store/modules/usuario/actions';
+import Dialog from '../../componentes/Dialog';
 
 
 
 function Cadastro() {
-    const auth = useSelector(({ usuario }) => usuario);
-    let navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const [openDialog, setOpenDialog] = useState(false);
+
+    const [mensagem, SetMensagem] = useState({
+        tipo: "",
+        texto: "",
+        destino: ""
+    });
+
+    
     const [credentials, setCredentials] = useState({
         nome: '',
         sobrenome: '',
@@ -28,12 +35,25 @@ function Cadastro() {
     function handleSubmit(e) {
         e.preventDefault();
         if (credentials.passwordcompare === credentials.password) {
+
             dispatch(registerStart(credentials));
+            setOpenDialog(true);
+            SetMensagem({tipo:"Confirmação", texto:"Tudo pronto, agora é só fazer o login!", destino:"login"});
+            
+            
+        } else {
+            setOpenDialog(true);
+            SetMensagem({tipo:"Erro", texto:"As senhas não coincidem!"});
         }
     }
 
     return (
         <>
+
+            {openDialog &&
+                <Dialog mensagem={mensagem} openDialog={setOpenDialog} />
+            }
+
             <header>
                 <section id="ft_logo">
                     <a href='http://localhost:3000/'><img src={Logo} alt='logo Reclama Cidade' /></a>
@@ -80,9 +100,9 @@ function Cadastro() {
                             <section class="cx_bt">
                                 <button type='submit'> Criar Conta</button>
                             </section>
-                            <hr/>
+                            <hr />
                             <section class="cx_links">
-                                <a onClick={() => navigate('/login')}>Entre na sua Conta</a>
+                                <a>Entre na sua Conta</a>
                             </section>
                         </form>
                     </div>
