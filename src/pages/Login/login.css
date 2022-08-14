@@ -101,6 +101,7 @@ form{
 .cx_links a{
     color: rgb(70, 70, 70);
     text-decoration: none;
+    cursor: pointer;
 }
 .cx_links a:hover{
     text-decoration: underline;

@@ -3,11 +3,10 @@ import Header from '../../componentes/Header/header';
 import Postagens from '../../componentes/Postagens/posts';
 import '../../assets/css/styleALL.css';
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../../auth/ProvideAuth';
 
 function Perfil() {
     const [postagens, setPostagens] = useState([])
-    const auth = useAuth();
+    
     useEffect(() => {
         if (postagens.length === 0) {
             auth.getPosts(() => {

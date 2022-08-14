@@ -1,42 +1,36 @@
-import { useState } from 'react';
-import '../../assets/css/styleALL.css';
-import { useAuth } from '../../auth/ProvideAuth';
+import { useEffect, useState } from 'react';
 import Header from '../../componentes/Header/header';
 import { useNavigate } from 'react-router-dom';
-import Cadastro from '../Cadastro/cadastro';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginStart } from "../../store/modules/usuario/actions";
 
 
 
 function Login() {
 
-    const auth = useAuth();
+    const auth = useSelector(({ usuario }) => usuario);
+    let navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const [dados, setDados] = useState({
+    const [credentials, setCredentials] = useState({
         email: '',
-        senha: '',
+        password: '',
     });
 
     function handleChange(e) {
-        setDados({ ...dados, [e.target.name]: e.target.value });
+        setCredentials({ ...credentials, [e.target.name]: e.target.value });
     }
-
-    let navigate = useNavigate();
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log(dados);
-
-        auth.signin(() => {
-            navigate("/")
-        });
+        dispatch(loginStart(credentials));
     }
-    function handleCadastro(e) {
-        e.preventDefault();
 
-        auth.signup(() => {
-            navigate("/cadastro")
-        });
-    }
+    useEffect(() => {
+        if (auth.currentUser) {
+            navigate('/');
+        }
+    }, [auth]);
 
 
     return (
@@ -51,11 +45,11 @@ function Login() {
                             </section>
                             <section class="cx_interacao">
                                 <label>E-mail</label>
-                                <input type="text" id="email" name="email" placeholder="Email aqui" value={dados.email} onChange={handleChange} />
+                                <input type="text" id="email" name="email" placeholder="Email aqui" value={credentials.email} onChange={handleChange} />
                             </section>
                             <section class="cx_interacao">
                                 <label>Senha</label>
-                                <input type="password" id="senha" name="senha" placeholder="senha aqui" value={dados.senha} onChange={handleChange} />
+                                <input type="password" id="password" name="password" placeholder="senha aqui" value={credentials.password} onChange={handleChange} />
                             </section>
                             <section class="cx_bt">
                                 <input type='submit' value="entrar" />
@@ -63,7 +57,7 @@ function Login() {
                             <hr />
                             <section class="cx_links">
                                 <a href="#">Esqueci minha senha</a>
-                                <a onClick={handleCadastro}>Cadastrar nova conta</a>
+                                <a onClick={() => navigate('/cadastro')}>Cadastrar nova conta</a>
                             </section>
                         </form>
                     </div>

@@ -1,30 +1,21 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import PrivateRoute from './auth/PrivateRoute';
-import ProvideAuth from './auth/ProvideAuth';
-import Cadastro from './pages/Cadastro/cadastro';
-import Home from './pages/Home/home';
-import Login from './pages/Login/login';
-import Perfil from './pages/Perfil/perfil';
+import Rotas from './Routes';
+import './assets/css/styleALL.css'
+import { Provider } from 'react-redux';
+import {store, persistor} from './store'
+import { PersistGate } from 'redux-persist/integration/react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <ProvideAuth >
-        <Routes>
-          <Route exact path='/' element={
-            <PrivateRoute>
-              <Home />
-            </PrivateRoute>
-          } />
-          <Route exact path='/login' element={<Login />} />
-          <Route exact path='/perfil' element={<Perfil />} />
-          <Route exact path="/cadastro" element={<Cadastro />} />
-
-        </Routes>
-      </ProvideAuth>
-    </BrowserRouter>
-  </React.StrictMode>
+<Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <React.StrictMode>
+        <BrowserRouter>
+          <Rotas />
+        </BrowserRouter>
+      </React.StrictMode>
+    </PersistGate>
+  </Provider>
 );

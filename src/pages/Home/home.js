@@ -2,7 +2,6 @@ import Postagens from '../../componentes/Postagens/posts';
 import Header from '../../componentes/Header/header';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../auth/ProvideAuth';
-import '../../assets/css/styleALL.css';
 
 function Modal(props) { 
 
@@ -68,16 +67,7 @@ function Modal(props) {
 
 function Home(){
     const [showModal, setShowModal] = useState(false);
-    const [postagens, setPostagens] = useState([])
-    const auth = useAuth();
-    useEffect(() => {
-        if(postagens.length === 0) {
-            auth.getPosts(()=> {
-                setPostagens(auth.postagens);
-            }); 
-        }           
-    });
-    console.log(postagens);
+
     return(
         <>
         {showModal && 
@@ -102,12 +92,13 @@ function Home(){
             </nav>
             <main>
                 <section class="postagens">
-                    {
+                    {/*
                         postagens.map((post, index) => {
                             return <Postagens 
                                     key={index} 
                                     dados={post} />
                         })
+                        */
                     }
                     
                 </section>

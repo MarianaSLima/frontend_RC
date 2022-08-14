@@ -822,9 +822,54 @@ li {
     margin: 5px;
 }
 
+/*///////////////////////////CADASTRO////////////////////////////*/
+
+.cadastro-area{
+    flex: 2;
+    gap: 50px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 70px;
+    margin: 50px;
+}
+
+.cx-newPost-input{
+    margin-bottom: 15px;
+}
+
+.cadastro-area form{
+    min-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.cadastro-area .form-area{
+    min-width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cadastro-area .cx_interacao{
+    min-width: 85%;
+}
+
+.cadastro-area .cx_interacao input{
+    min-width: 100%;
+}
+
+.cadastro-area .text_Area {
+    margin-left: 40px;
+    max-width: 800px;
+    max-height: 500px;
+}
+
 
 /*////////////////////////////////////LOGIN///////////////////////////////////*/
 
+.cadastro-area hr{
+    width: 85%;
+}
 
 .main-login {
     justify-content: center;
