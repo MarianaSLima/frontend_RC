@@ -3,11 +3,14 @@ import Logo from '../../assets/img/logo_2.png';
 import { useDispatch } from 'react-redux';
 import { registerStart } from '../../store/modules/usuario/actions';
 import Dialog from '../../componentes/Dialog';
+import { useNavigate } from 'react-router-dom';
+import userHolder from '../../assets/img/user.png';
 
 
 
 function Cadastro() {
     const dispatch = useDispatch();
+    let navigate = useNavigate();
 
     const [openDialog, setOpenDialog] = useState(false);
 
@@ -17,7 +20,7 @@ function Cadastro() {
         destino: ""
     });
 
-    
+
     const [credentials, setCredentials] = useState({
         nome: '',
         sobrenome: '',
@@ -38,12 +41,11 @@ function Cadastro() {
 
             dispatch(registerStart(credentials));
             setOpenDialog(true);
-            SetMensagem({tipo:"Confirmação", texto:"Tudo pronto, agora é só fazer o login!", destino:"login"});
-            
-            
+            SetMensagem({ tipo: "Confirmação", texto: "Tudo pronto, agora é só fazer o login!", destino: "login" });
+
         } else {
             setOpenDialog(true);
-            SetMensagem({tipo:"Erro", texto:"As senhas não coincidem!"});
+            SetMensagem({ tipo: "Erro", texto: "As senhas não coincidem!", destino: "cadastro" });
         }
     }
 
@@ -69,7 +71,10 @@ function Cadastro() {
                             </section>
                             <section className='cx-newPost-input'>
                                 <section className='envio-img-newPost'>
-                                    <img width="90px" />
+                                    <label for="file">
+                                        <img src={userHolder} />
+                                        <p className='edit-file'>Editar</p>
+                                    </label>
                                     <input type='file' id='file' name='file' />
                                 </section>
                             </section>
@@ -102,7 +107,7 @@ function Cadastro() {
                             </section>
                             <hr />
                             <section class="cx_links">
-                                <a>Entre na sua Conta</a>
+                                <a onClick={() => navigate('/login')}>Entre na sua Conta</a>
                             </section>
                         </form>
                     </div>
