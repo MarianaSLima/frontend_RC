@@ -20,7 +20,6 @@ function Cadastro() {
         destino: ""
     });
 
-
     const [credentials, setCredentials] = useState({
         nome: '',
         sobrenome: '',
@@ -30,6 +29,12 @@ function Cadastro() {
         passwordcompare: ''
 
     });
+
+    const [ImgLoad, setImgLoad] = useState(userHolder);
+    function handleChangeFile(e) {
+        const [file] = e.target.files;
+        setImgLoad(URL.createObjectURL(file));
+    }
 
     function handleChange(e) {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -72,10 +77,10 @@ function Cadastro() {
                             <section className='cx-newPost-input'>
                                 <section className='envio-img-newPost'>
                                     <label for="file">
-                                        <img src={userHolder} />
+                                        <img src={ImgLoad} />
                                         <p className='edit-file'>Editar</p>
                                     </label>
-                                    <input type='file' id='file' name='file' />
+                                    <input type='file' id='file' name='file' onChange={handleChangeFile}/>
                                 </section>
                             </section>
                             <section class="cx_interacao">
