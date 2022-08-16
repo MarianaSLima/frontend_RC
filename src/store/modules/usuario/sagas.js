@@ -33,7 +33,7 @@ async function updade(id, nome, sobrenome, datanasc, email){
         datanasc,
         email
     });
-    const response = await Api.put('/user/'+id, data);
+    const response = await Api.put(`/user/${id}`, data);
     return response.data.data;
 }
 
@@ -48,7 +48,7 @@ function* logInWithCredentials({credentials}){
 
 //esse aqui
 function* registerWithCredentials({credentials}){
-    const{fotouser, nome, sobrenome, datanasc, email, password} = credentials;
+    const {fotouser, nome, sobrenome, datanasc, email, password} = credentials;
     try{
         yield signUp(fotouser, nome, sobrenome, datanasc, email, password);
     }catch(error){

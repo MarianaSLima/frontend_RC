@@ -57,7 +57,7 @@ function Login() {
                                 <input type="password" id="password" name="password" placeholder="senha aqui" value={credentials.password} onChange={handleChange} />
                             </section>
                             <section class="cx_bt">
-                                <input type='submit' value="entrar" />
+                                <button>Entrar</button>
                             </section>
                             <hr />
                             <section class="cx_links">
