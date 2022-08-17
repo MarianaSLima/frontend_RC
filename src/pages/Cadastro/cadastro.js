@@ -23,6 +23,7 @@ function Cadastro() {
     const [credentials, setCredentials] = useState({
         nome: '',
         sobrenome: '',
+        fotoUser: userHolder,
         datanasc: '',
         email: '',
         password: '',
@@ -30,11 +31,11 @@ function Cadastro() {
 
     });
 
-    const [ImgLoad, setImgLoad] = useState(userHolder);
     function handleChangeFile(e) {
         const [file] = e.target.files;
-        setImgLoad(URL.createObjectURL(file));
+        setCredentials({fotoUser: URL.createObjectURL(file)});
     }
+
 
     function handleChange(e) {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -52,6 +53,7 @@ function Cadastro() {
             setOpenDialog(true);
             SetMensagem({ tipo: "Erro", texto: "As senhas não coincidem!", destino: "cadastro" });
         }
+        console.log(credentials);
     }
 
     return (
@@ -77,7 +79,7 @@ function Cadastro() {
                             <section className='cx-newPost-input'>
                                 <section className='envio-img-newPost'>
                                     <label for="file">
-                                        <img src={ImgLoad} />
+                                        <img src={credentials.fotoUser} />
                                         <p className='edit-file'>Editar</p>
                                     </label>
                                     <input type='file' id='file' name='file' onChange={handleChangeFile}/>

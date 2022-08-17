@@ -13,16 +13,15 @@ async function logIn(email, password) {
 }
 
 //implementar essse
-async function signUp(fotouser, nome, sobrenome, datanasc, email, password){
+async function signUp(nome, sobrenome, fotoUser, datanasc, email, password){
     const data = JSON.stringify({
-        fotouser,
         nome,
         sobrenome,
+        fotoUser,
         datanasc,
         email,
         password
     });
-    console.log(nome);
     await Api.post('/user/signup', data);
 }
 
@@ -48,9 +47,9 @@ function* logInWithCredentials({credentials}){
 
 //esse aqui
 function* registerWithCredentials({credentials}){
-    const {fotouser, nome, sobrenome, datanasc, email, password} = credentials;
+    const {nome, sobrenome, fotoUser, datanasc, email, password} = credentials;
     try{
-        yield signUp(fotouser, nome, sobrenome, datanasc, email, password);
+        yield signUp(nome, sobrenome, fotoUser, datanasc, email, password);
     }catch(error){
         yield put(registerFailure(error));
     }
