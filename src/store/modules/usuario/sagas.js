@@ -1,5 +1,5 @@
 import Api from "../../../services/api";
-import {loginFailure, loginSuccess, registerFailure, updateFailure, updateSuccess} from "./actions";
+import {loginFailure, loginSuccess, registerFailure, registerSuccess, updateFailure, updateSuccess} from "./actions";
 import {all, put, takeLatest} from 'redux-saga/effects';
 
 async function logIn(email, password) {
@@ -13,16 +13,19 @@ async function logIn(email, password) {
 }
 
 //implementar essse
-async function signUp(nome, sobrenome, fotoUser, datanasc, email, password){
+async function signUp(nome, sobrenome, fotoUser, datanasc, email, password, passwordCompare){
     const data = JSON.stringify({
         nome,
         sobrenome,
         fotoUser,
         datanasc,
         email,
-        password
+        password, 
+        passwordCompare
     });
-    await Api.post('/user/signup', data);
+    
+    const response = await Api.post('/user/signup', data);
+    return response.data;
 }
 
 async function updade(id, nome, sobrenome, datanasc, email){
@@ -47,9 +50,11 @@ function* logInWithCredentials({credentials}){
 
 //esse aqui
 function* registerWithCredentials({credentials}){
-    const {nome, sobrenome, fotoUser, datanasc, email, password} = credentials;
+    const {nome, sobrenome, fotoUser, datanasc, email, password, passwordCompare} = credentials;
     try{
-        yield signUp(nome, sobrenome, fotoUser, datanasc, email, password);
+        const user = yield signUp(nome, sobrenome, fotoUser, datanasc, email, password, passwordCompare);
+        console.log(user);
+        yield put(registerSuccess(user));
     }catch(error){
         yield put(registerFailure(error));
     }

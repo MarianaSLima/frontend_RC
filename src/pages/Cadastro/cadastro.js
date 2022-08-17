@@ -1,24 +1,25 @@
 import { useState } from 'react';
 import Logo from '../../assets/img/logo_2.png';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { registerStart } from '../../store/modules/usuario/actions';
 import Dialog from '../../componentes/Dialog';
 import { useNavigate } from 'react-router-dom';
 import userHolder from '../../assets/img/user.png';
+import validator from 'validator';
 
 
 
 function Cadastro() {
+    const errorApi = useSelector(({ usuario }) => usuario);
+
     const dispatch = useDispatch();
     let navigate = useNavigate();
 
-    const [openDialog, setOpenDialog] = useState(false);
+    const [openSpan, setOpenSpan] = useState(false);
 
-    const [mensagem, SetMensagem] = useState({
-        tipo: "",
-        texto: "",
-        destino: ""
-    });
+    const [emailError, setEmailError] = useState("");
+
+    const [openDialog, setOpenDialog] = useState(false);
 
     const [credentials, setCredentials] = useState({
         nome: '',
@@ -31,11 +32,22 @@ function Cadastro() {
 
     });
 
-    function handleChangeFile(e) {
-        const [file] = e.target.files;
-        setCredentials({fotoUser: URL.createObjectURL(file)});
+    const validateEmail = (e) => {
+        var testEmail = e.target.value;
+
+        if (validator.isEmail(testEmail)) {
+            setOpenSpan(false);
+            setCredentials({ email: testEmail });
+        } else {
+            setOpenSpan(true);
+            setEmailError("E-mail inválido!");
+        }
     }
 
+    function handleChangeFile(e) {
+        const [file] = e.target.files;
+        setCredentials({ fotoUser: URL.createObjectURL(file) });
+    }
 
     function handleChange(e) {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -43,24 +55,19 @@ function Cadastro() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        if (credentials.passwordcompare === credentials.password) {
+        dispatch(registerStart(credentials));
 
-            dispatch(registerStart(credentials));
+        if (errorApi.error) {
             setOpenDialog(true);
-            SetMensagem({ tipo: "Confirmação", texto: "Tudo pronto, agora é só fazer o login!", destino: "login" });
-
-        } else {
-            setOpenDialog(true);
-            SetMensagem({ tipo: "Erro", texto: "As senhas não coincidem!", destino: "cadastro" });
         }
-        console.log(credentials);
+
     }
 
     return (
         <>
 
             {openDialog &&
-                <Dialog mensagem={mensagem} openDialog={setOpenDialog} />
+                <Dialog mensagem={errorApi.error} openDialog={setOpenDialog} />
             }
 
             <header>
@@ -78,36 +85,41 @@ function Cadastro() {
                             </section>
                             <section className='cx-newPost-input'>
                                 <section className='envio-img-newPost'>
-                                    <label for="file">
+                                    <label>
                                         <img src={credentials.fotoUser} />
                                         <p className='edit-file'>Editar</p>
                                     </label>
-                                    <input type='file' id='file' name='file' onChange={handleChangeFile}/>
+                                    <input type='file' id='file' name='file' onChange={handleChangeFile} />
                                 </section>
                             </section>
                             <section class="cx_interacao">
                                 <label>Nome</label>
-                                <input type="text" id="nome" name="nome" placeholder="Nome" value={credentials.Usuario} onChange={handleChange} />
+                                <input type="text" id="nome" name="nome" placeholder="Nome" value={credentials.Usuario} onChange={handleChange} required />
                             </section>
                             <section class="cx_interacao">
                                 <label>Sobrenome</label>
-                                <input type="text" id="sobrenome" name="sobrenome" placeholder="Sobrenome" value={credentials.sobrenome} onChange={handleChange} />
+                                <input type="text" id="sobrenome" name="sobrenome" placeholder="Sobrenome" value={credentials.sobrenome} onChange={handleChange} required />
                             </section>
                             <section class="cx_interacao">
                                 <label>Data de Nascimento</label>
-                                <input type="date" id="datanasc" name="datanasc" value={credentials.datanasc} onChange={handleChange} />
+                                <input type="date" id="datanasc" name="datanasc" value={credentials.datanasc} onChange={handleChange} required />
                             </section>
                             <section class="cx_interacao">
                                 <label>E-mail</label>
-                                <input type="text" id="email" name="email" placeholder="Email" value={credentials.email} onChange={handleChange} />
+                                <input type="text" id="email" name="email" placeholder="Email" onChange={(e) => validateEmail(e)} required />
+
+                                {openSpan &&
+                                <span style={{  fontSize: '12px', color: 'red',}}>{emailError}</span>
+                                }
                             </section>
+
                             <section class="cx_interacao">
                                 <label>Senha</label>
-                                <input type="password" id="password" name="password" placeholder="Senha" value={credentials.password} onChange={handleChange} />
+                                <input type="password" id="password" name="password" placeholder="Senha" value={credentials.password} onChange={handleChange} required />
                             </section>
                             <section class="cx_interacao">
                                 <label>Confirme a senha</label>
-                                <input type="password" id="passwordcompare" name="passwordcompare" placeholder="Confirmação a senha" value={credentials.passwordcompare} onChange={handleChange} />
+                                <input type="password" id="passwordcompare" name="passwordcompare" placeholder="Confirmação a senha" value={credentials.passwordcompare} onChange={handleChange} required />
                             </section>
                             <section class="cx_bt">
                                 <button type='submit'> Criar Conta</button>

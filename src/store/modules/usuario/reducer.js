@@ -30,6 +30,12 @@ function usuario(state=initialState, action) {
                 ...state,
                 error: action.error,
             };
+            case '@usuario/REGISTER_SUCCESS':
+            return{
+                ...state,
+                currentUser: action.user.data,
+                error: action.user.error,
+            };
         case '@usuario/LOG_OUT':
             return initialState;
 
