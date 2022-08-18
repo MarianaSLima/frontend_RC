@@ -7,12 +7,6 @@ import { loginStart } from "../../store/modules/usuario/actions";
 
 
 function Login() {
-    const [mensagem, setMensagem] = useState({
-        tipo: "",
-        texto: "",
-        destino: ""
-    })
-
     const auth = useSelector(({ usuario }) => usuario);
     let navigate = useNavigate();
     const dispatch = useDispatch();

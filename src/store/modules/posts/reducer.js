@@ -12,7 +12,7 @@ function posts(state = initialState, action) {
             return {
                 ...state,
                 post: action.user,
-                error: null,
+                error: action.user.error,
             };
         case '@usuario/LISTPOST_FAILURE':
             return {

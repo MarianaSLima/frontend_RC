@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Logo from '../../assets/img/logo_2.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerStart } from '../../store/modules/usuario/actions';
@@ -40,18 +40,14 @@ function Cadastro() {
         e.preventDefault();
         dispatch(registerStart(credentials));
 
-        if (!auth.error) {
-            setOpenDialog(false);
+        if (auth.error) {
+            setOpenDialog(true); 
         }else{
-            setOpenDialog(true);
+            navigate('/login');
+            setOpenDialog(false);
         }
-    }
 
-    useEffect(() => {
-        if (auth.currentUser) {
-            navigate('/');
-        }
-    }, [auth]);
+    }
 
     return (
         <>
