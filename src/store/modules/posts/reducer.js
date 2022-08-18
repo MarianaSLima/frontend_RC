@@ -6,10 +6,10 @@ const initialState = {
 }
 
 //recebe a ação e carrega o currentUser
-function posts(state=initialState, action) {
-    switch(action.type) {
+function posts(state = initialState, action) {
+    switch (action.type) {
         case '@usuario/LISTPOST_SUCCESS':
-            return{
+            return {
                 ...state,
                 post: action.user,
                 error: null,
@@ -19,7 +19,12 @@ function posts(state=initialState, action) {
                 ...state,
                 error: action.error,
             };
-            
+        case '@usuario/REGISTERPOST_FAILURE':
+            return {
+                ...state,
+                currentUser: action.user.data,
+                error: action.user.error,
+            };
 
         default:
             return state;

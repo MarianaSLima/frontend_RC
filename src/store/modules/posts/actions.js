@@ -5,8 +5,6 @@ export const listPostStart = (dados) => ({
     dados,
 });
 
-//objeto usuario
-
 export const listPostSuccess = (posts) =>({
     type: '@usuario/LISTPOST_SUCCESS',
     posts,
@@ -20,9 +18,6 @@ export const registerPostStart = (dados) => ({
     type: '@usuario/REGISTERPOST_START',
     dados,
 });
-
-//objeto usuario
-
 export const registerPostSuccess = (posts) =>({
     type: '@usuario/REGISTERPOST_SUCCESS',
     posts,

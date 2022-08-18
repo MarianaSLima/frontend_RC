@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Logo from '../../assets/img/logo_2.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerStart } from '../../store/modules/usuario/actions';
@@ -9,7 +9,7 @@ import userHolder from '../../assets/img/user.png';
 
 
 function Cadastro() {
-    const errorApi = useSelector(({ usuario }) => usuario);
+    const auth = useSelector(({ usuario }) => usuario);
 
     const dispatch = useDispatch();
     let navigate = useNavigate();
@@ -40,18 +40,24 @@ function Cadastro() {
         e.preventDefault();
         dispatch(registerStart(credentials));
 
-        if (!errorApi.error) {
+        if (!auth.error) {
             setOpenDialog(false);
         }else{
             setOpenDialog(true);
         }
     }
 
+    useEffect(() => {
+        if (auth.currentUser) {
+            navigate('/');
+        }
+    }, [auth]);
+
     return (
         <>
 
             {openDialog &&
-                <Dialog mensagem={errorApi.error} openDialog={setOpenDialog} />
+                <Dialog mensagem={auth.error} openDialog={setOpenDialog} />
             }
 
             <header>
