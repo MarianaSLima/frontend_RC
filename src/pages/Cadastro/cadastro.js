@@ -5,7 +5,6 @@ import { registerStart } from '../../store/modules/usuario/actions';
 import Dialog from '../../componentes/Dialog';
 import { useNavigate } from 'react-router-dom';
 import userHolder from '../../assets/img/user.png';
-import validator from 'validator';
 
 
 
@@ -14,10 +13,6 @@ function Cadastro() {
 
     const dispatch = useDispatch();
     let navigate = useNavigate();
-
-    const [openSpan, setOpenSpan] = useState(false);
-
-    const [emailError, setEmailError] = useState("");
 
     const [openDialog, setOpenDialog] = useState(false);
 
@@ -28,21 +23,9 @@ function Cadastro() {
         datanasc: '',
         email: '',
         password: '',
-        passwordcompare: ''
+        passwordCompare: ''
 
     });
-
-    const validateEmail = (e) => {
-        var testEmail = e.target.value;
-
-        if (validator.isEmail(testEmail)) {
-            setOpenSpan(false);
-            setCredentials({ email: testEmail });
-        } else {
-            setOpenSpan(true);
-            setEmailError("E-mail inválido!");
-        }
-    }
 
     function handleChangeFile(e) {
         const [file] = e.target.files;
@@ -57,10 +40,11 @@ function Cadastro() {
         e.preventDefault();
         dispatch(registerStart(credentials));
 
-        if (errorApi.error) {
+        if (!errorApi.error) {
+            setOpenDialog(false);
+        }else{
             setOpenDialog(true);
         }
-
     }
 
     return (
@@ -106,20 +90,22 @@ function Cadastro() {
                             </section>
                             <section class="cx_interacao">
                                 <label>E-mail</label>
-                                <input type="text" id="email" name="email" placeholder="Email" onChange={(e) => validateEmail(e)} required />
+                                <input type="text" id="email" name="email" placeholder="Email" value={credentials.email} onChange={handleChange} required />
 
-                                {openSpan &&
-                                <span style={{  fontSize: '12px', color: 'red',}}>{emailError}</span>
+                                {!credentials.email || !credentials.email.includes("@") &&
+                                <span style={{  fontSize: '12px', color: 'red'}}>E-mail invalido</span>
                                 }
                             </section>
 
                             <section class="cx_interacao">
                                 <label>Senha</label>
                                 <input type="password" id="password" name="password" placeholder="Senha" value={credentials.password} onChange={handleChange} required />
+                                
                             </section>
                             <section class="cx_interacao">
                                 <label>Confirme a senha</label>
-                                <input type="password" id="passwordcompare" name="passwordcompare" placeholder="Confirmação a senha" value={credentials.passwordcompare} onChange={handleChange} required />
+                                <input type="password" id="passwordCompare" name="passwordCompare" placeholder="Confirmação a senha" value={credentials.passwordCompare} onChange={handleChange} required />
+                                
                             </section>
                             <section class="cx_bt">
                                 <button type='submit'> Criar Conta</button>
